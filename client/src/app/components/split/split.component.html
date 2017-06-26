@@ -1,0 +1,111 @@
+<div class="col-xs-12 col-md-6 section-conatiner" *ngIf="isDrinkBillSplit">
+	<div class="section-header clearfix">
+		<h4 class="pull-left">Split Drinks Bill</h4>
+		<div class="col-xs-4 col-md-6 nopadding pull-right">
+			<a href="javascript:void(0)" class="btn pull-right" (click)="openAddItemModal('drink')">
+				<i class="fa fa-glass fa-small" aria-hidden="true"></i> &nbsp;
+				Add Drink Items
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" *ngFor="let spilttedDetail of individualMemberSplittedDetails; let i = index">
+			<h6>{{spilttedDetail.name}}</h6>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Count</th>
+						<th>Item Name</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let drinkBillDetail of spilttedDetail.drinkDetails; let j = index">
+						<td>{{drinkBillDetail.itemCount}}</td>
+						<td>{{drinkBillDetail.itemName}}</td>
+						<td>{{drinkBillDetail.price}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>			
+	</div>
+</div>
+<div class="col-xs-12 col-md-6 section-conatiner" *ngIf="isFoodBillSplit">
+	<div class="section-header clearfix">
+		<h4 class="pull-left">Split Food Bill</h4>
+		<div class="col-xs-4 col-md-6 nopadding pull-right">
+			<a href="javascript:void(0)"  class="btn pull-right" (click)="openAddItemModal('food')">
+				<i class="fa fa-cutlery fa-small" aria-hidden="true"></i> &nbsp;
+				Add Food Items
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12" *ngFor="let spilttedDetail of individualMemberSplittedDetails; let i = index">
+			<h6>{{spilttedDetail.name}}</h6>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Count</th>
+						<th>Item Name</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let drinkBillDetail of spilttedDetail.foodDetails; let j = index">
+						<td>{{drinkBillDetail.itemCount}}</td>
+						<td>{{drinkBillDetail.itemName}}</td>
+						<td>{{drinkBillDetail.price}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>	
+	</div>
+</div>
+<div class="item-selection-modal-ovelay" *ngIf="toggleItemSelectionModal" ></div>
+<div class="item-selection-modal row" *ngIf="toggleItemSelectionModal" >
+	<div class="col-xs-12 cleafix">
+		<a href="javascript:void(0)" (click)="closeItemSelectionModal()" class="pull-right"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+		<br/>
+		<form class="form-inline">
+			<label for="item">Select Item</label>
+			<select class="form-control mb-2 mr-sm-2 mb-sm-0" id="item" name="item" [(ngModel)]="itemName">
+				<option value="">Please select</option>
+				<option value="Item 1">Item 1</option>
+				<option value="Item 2">Item 2</option>
+			</select>
+			
+			<label for="quantity">Add Quantity</label>
+			<input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" name="quantity" id="quantity" [(ngModel)]="quantity"/>
+			
+			
+			<button type="submit" class="btn btn-primary" (click)="onClickAddItems()">Add + </button>
+		</form>
+		<br/>
+		<div class="row">
+			<div class="col-xs-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th *ngFor="let member of allMembers; let i = index">
+								{{member.name}}
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of items; let i = index">
+							<td>
+								{{item.value}}({{item.price}})
+							</td>
+							<td *ngFor="let member of allMembers; let j = index">
+								<input type="checkbox" [checked]="item.isChekced[j]" (change)="onChangeItemCheckbox($event, item, member, j)"/>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success pull-right" (click)="onClickDoneButton()">Done</button>
+	</div>
+</div>

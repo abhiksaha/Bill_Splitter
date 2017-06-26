@@ -1,0 +1,108 @@
+<button class="btn btn-primary pull-right" *ngIf="isAllDataSectionVisible" (click)="onAddNewDataBtnClick()">Add New Data</button>
+<button class="btn btn-primary pull-right" *ngIf="isAddNewSectionVisible" (click)="onShowAllDataBtnClick()">Show All Data</button>
+
+<div class="row" *ngIf="isAllDataSectionVisible">
+	<div class="col-xs-12" *ngFor="let res of allRestaurantList; let i = index">
+		<h4>{{res.restaurantName}}</h4>
+		<h5>{{res.restaurantAddress}}</h5>
+		<p>Food Items</p>
+		<div class="col-xs-12" *ngFor="let item of res.foodMenu; let i = index;">
+			<h4><strong>Item Name : </strong>{{item.itemName}}</h4>
+			<h4><strong>Item Price : </strong>{{item.itemPrice}}</h4>
+		</div>
+		<p>Drink Items</p>
+		<div class="col-xs-12" *ngFor="let item of res.drinksMenu; let i = index;">
+			<h4><strong>Item Name : </strong>{{item.itemName}}</h4>
+			<h4><strong>Item Price : </strong>{{item.itemPrice}}</h4>
+		</div>
+		<button class="btn btn-success pull-right" (click)="onClickEditData(res)">Edit Data</button>
+	</div>
+</div>
+
+<div class="row" *ngIf="isAddNewSectionVisible || isEditSectionVisible">
+	<div class="col-xs-12">
+		<form>
+			<h4>{{isEditSectionVisible ? 'Edit' : 'Add New'}} Details</h4>
+			<div class="form-group">
+				<label for="name">{{isEditSectionVisible ? 'Edit' : 'Add'}} Name</label>
+				<input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" [(ngModel)]="newRestaurantName" />
+			</div>
+			<div class="form-group">
+				<label for="address">{{isEditSectionVisible ? 'Edit' : 'Add'}} Address</label>
+				<input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="newRestaurantAddress" />
+			</div>
+			<div class="form-group">
+				<label for="item">{{isEditSectionVisible ? 'Edit' : 'Enter'}} Food Menu</label>
+				<div class="row" *ngIf="foodMenuList.length">
+					<div class="col-xs-12" *ngFor="let foodMenu of foodMenuList; let i = index">
+						<div class="row">
+							<div class="col-xs-5">
+								<input type="text" class="form-control" id="food_itemName_{{i}}" name="food_itemName_{{i}}" [(ngModel)] = "foodMenu.itemName" />
+							</div>
+							<div class="col-xs-5">
+								<input type="text" class="form-control" id="food_itemPrice_{{i}}" name="food_itemPrice_{{i}}" [(ngModel)] = "foodMenu.itemPrice" />
+							</div>
+							<div class="col-xs-2">					
+								<a class="btn btn-block btn-success" (click)="removeItemToManuList('food', i)">Remove Item</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-5">
+								<input type="text" class="form-control col-xs-5" id="itemName" name="itemName" placeholder="Enter Item Name" [(ngModel)]="newFoodItemName"/>
+							</div>
+							<div class="col-xs-5">
+								<input type="text" class="form-control col-xs-5" id="itemPrice" name="itemPrice" placeholder="Enter Item Price" [(ngModel)]="newFoodItemPrice"/>					
+							</div>
+							<div class="col-xs-2">					
+								<a class="btn btn-block btn-success" (click)="addItemToManuList('food')">Add Item</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="item">{{isEditSectionVisible ? 'Edit' : 'Enter'}} Drink Menu</label>
+				<div class="row" *ngIf="drinkMenuList.length">
+					<div class="col-xs-12" *ngFor="let drinkMenu of drinkMenuList; let i = index">
+						<div class="row">
+							<div class="col-xs-5">
+								<input type="text" class="form-control" id="drink_itemName_{{i}}" name="drink_itemName_{{i}}" [(ngModel)] = "drinkMenu.itemName" />
+							</div>
+							<div class="col-xs-5">		
+								<input type="text" class="form-control" id="drink_itemPrice_{{i}}" name="drink_itemPrice_{{i}}" [(ngModel)] = "drinkMenu.itemPrice" />
+							</div>
+							<div class="col-xs-2">	
+								<a class="btn btn-block btn-success" (click)="removeItemToManuList('drink', i)">Remove Item</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-5">
+								<input type="text" class="form-control col-xs-5" id="itemName" name="itemName" placeholder="Enter Item Name" [(ngModel)]="newDrinkItemName"/>
+							</div>
+							<div class="col-xs-5">					
+								<input type="text" class="form-control col-xs-5" id="itemPrice" name="itemPrice" placeholder="Enter Item Price" [(ngModel)]="newDrinkItemPrice"/>					
+							</div>
+							<div class="col-xs-2">	
+								<a class="btn btn-block btn-success" (click)="addItemToManuList('drink')">Add Item</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<button type="submit" class="btn btn-primary col-xs-4 col-xs-offset-4" (click)="saveDetails()">
+				{{isEditSectionVisible ? 'Edit' : 'Save'}} Details
+			</button>
+		</form>
+	</div>
+</div>

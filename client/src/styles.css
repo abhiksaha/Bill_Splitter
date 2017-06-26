@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+*{margin: 0; padding: 0;transition: all 0.5s ease-out;}
+h1,h2,h3,h4,h5,h6,p{ margin: 0}
+p{margin-top: 5px;}
+body{
+    color: #000; 
+    text-transform: uppercase; 
+    background: #fff; 
+    font-family: 'PT Sans', sans-serif;
+    
+}
+.nomargin{margin: 0 !important;}
+.nopadding{padding: 0 !important;}
+
+/*fa styles*/
+.fa{ color: #fff; font-size: 30px;}
+.fa-black{color: #000;}
+.fa-small{ font-size: 20px;}
+
+a, a:hover, a:active{ color: #fff!important; text-decoration: none!important;}
+a.btn{ background:rgba(0,149,255,0.8); min-width: 50%; line-height: 25px;}
+/*header*/
+header{ 
+    background: rgba(0, 0, 0, 0.9); 
+    color: #fff; 
+    height: 60px; 
+    padding-top: 15px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+.user{ vertical-align: super;}
+
+
+.main-container{ padding: 20px 15px; margin-top: 70px;}
+
+input[type="checkbox"],
+input[type="radio"]{
+    position: absolute;
+    left: -9999px;
+}
+ @media screen and (max-width:992px){
+     .main-container{ margin-top: 130px;}
+     .sidebar{ height:60px!important; }
+     .w_20{width: 20%;  float: left;}
+ }

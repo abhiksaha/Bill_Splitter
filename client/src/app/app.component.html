@@ -1,0 +1,21 @@
+<header>
+	<div class="row nomargin">
+		<div class="col-xs-12 col-md-11 col-md-offset-1 nopadding">
+			<div class="col-xs-6 text-left">
+				<h3>Bill Splitter</h3>
+			</div>
+			<div class="col-xs-6 text-right">
+				<span class="user">Welcome {{username}}</span>
+				<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+			</div>
+		</div>
+	</div>
+</header>
+<side-bar (updateSideBar)="refreshSideBar($event)"></side-bar>
+<div class="container-fluid">
+	<div class="row">		
+		<section class="col-xs-12 col-md-11 col-md-offset-1 main-container">
+			<router-outlet></router-outlet>
+		</section>
+	</div>
+</div>
